@@ -7,35 +7,32 @@ public class PalindromeCheckerApp {
             System.out.print("Enter a string: ");
             String input = sc.nextLine();
 
-            Stack<Character> stack = new Stack<>();
-            Queue<Character> queue = new LinkedList<>();
+            Deque<Character> deque = new ArrayDeque<>();
 
-            // Insert characters into stack and queue
-            for (int i = 0; i < input.length(); i++) {
-                char ch = input.charAt(i);
-                stack.push(ch);   // LIFO
-                queue.add(ch);    // FIFO
+            // Insert characters into deque
+            for (char ch : input.toCharArray()) {
+                deque.addLast(ch);
             }
 
             boolean isPalindrome = true;
 
-            // Compare elements
-            while (!stack.isEmpty()) {
-                char fromStack = stack.pop();
-                char fromQueue = queue.remove();
+            // Compare front and rear
+            while (deque.size() > 1) {
+                char front = deque.removeFirst();
+                char rear = deque.removeLast();
 
-                if (fromStack != fromQueue) {
+                if (front != rear) {
                     isPalindrome = false;
                     break;
                 }
             }
 
-            // Display result
             if (isPalindrome) {
                 System.out.println("Palindrome");
             } else {
                 System.out.println("Not a Palindrome");
             }
+
             sc.close();
     }
 }
