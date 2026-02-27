@@ -4,20 +4,20 @@ public class PalindromeCheckerApp {
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
 
-        char[] chars = input.toCharArray();
-        boolean isPalindrome = true;
+        Stack<Character> stack = new Stack<>();
 
-        int start = 0;
-        int end = chars.length - 1;
-
-        while (start < end) {
-            if (chars[start] != chars[end]) {
-                isPalindrome = false;
-                break;
-            }
-            start++;
-            end--;
+        // Push all characters onto stack
+        for (int i = 0; i < input.length(); i++) {
+            stack.push(input.charAt(i));
         }
+
+        // Pop characters to form reversed string
+        String reversed = "";
+        while (!stack.isEmpty()) {
+            reversed += stack.pop();
+        }
+
+        boolean isPalindrome = input.equals(reversed);
 
         System.out.println("Input : " + input);
         System.out.println("Is Palindrome? : " + isPalindrome);
